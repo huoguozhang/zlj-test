@@ -1,11 +1,15 @@
 <template>
   <div>
-    <myForm :rules="rules" :model="userForm">
+    <myForm :rules="rules" :model="userForm" ref="myForm">
       <myFormItem prop="name" label="用户名">
         <my-input type="text" v-model="userForm.name"></my-input>
       </myFormItem>
       <myFormItem prop="email" label="邮箱">
         <my-input type="email" v-model="userForm.email"></my-input>
+      </myFormItem>
+      <myFormItem>
+        <el-button @click="submit">提交</el-button>
+        <el-button @click="resetForm">重置</el-button>
       </myFormItem>
     </myForm>
   </div>
@@ -33,7 +37,7 @@ export default {
         name: [
           { required: true, message: '用户名不能为空', trigger: 'blur' }
         ],
-        mail: [
+        email: [
           { required: true, message: '邮箱不能为空', trigger: 'blur' },
           { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
         ]
@@ -43,6 +47,10 @@ export default {
   created () {
   },
   methods: {
+    submit () {},
+    resetForm () {
+      this.$refs.myForm.resetFields()
+    }
   }
 }
 </script>

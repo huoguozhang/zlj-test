@@ -9,7 +9,7 @@
   </div>
 </template>
 <script>
-import emmit from '@/utils/emmit.js'
+import emmit from '../utils/emmit'
 import AsyncValidator from 'async-validator'
 export default {
   name: 'myFormItem',
@@ -39,8 +39,9 @@ export default {
   methods: {
     setRules () {
       let rules = this.getRules()
-      debugger
-      rules.some(v => this.isRequired =  v.required || false)
+      if (rules.length > 0) {
+        rules.some(v => this.isRequired =  v.required || false)
+      }
       this.$on('form-change', this.onFieldChange)
       this.$on('form-blur', this.onFieldBlur)
     },
@@ -74,7 +75,6 @@ export default {
       validator.validate(model, { firstFields: true }, errors => {
         this.validateState = !errors ? 'success' : 'error'
         this.validateMessage = errors ? errors[0].message : ''
-
         callback(this.validateMessage)
       })
     },
@@ -83,12 +83,18 @@ export default {
     },
     onFieldChange() {
       this.validate('change')
+    },
+    // 重置数据
+    resetField () {
+      this.validateState = '' // 校验状态
+      this.validateMessage = ''
+      this.form.model[this.prop] = this.initValue
     }
   },
   mounted () {
     if (this.prop) {
       this.dispatch('myForm', 'add-form-item', this)
-      this.initValue = this.fieldValue
+      this.initValue = this.fieldValue // 缓存初始值
       this.setRules()
     }
   },
@@ -101,6 +107,7 @@ export default {
 </script>
 <style scoped>
   .comp-ct{
+    display: flex;
     margin: 24px;
   }
 </style>

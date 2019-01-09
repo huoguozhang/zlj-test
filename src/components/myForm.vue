@@ -26,6 +26,13 @@ export default {
       fields: []
     }
   },
+  methods: {
+    resetFields () {
+      this.fields.forEach(field => {
+        field.resetField()
+      })
+    }
+  },
   created () {
     this.$on('add-form-item', (item) => {
       if (item) this.fields.push(item)

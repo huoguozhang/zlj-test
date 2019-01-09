@@ -18,7 +18,6 @@ export default {
           name = parent.$options.name
         }
       }
-      console.log(parent)
       parent.$emit.apply(parent, [eventName].concat(data))
     },
     broadcast (componentName, eventName, data) {

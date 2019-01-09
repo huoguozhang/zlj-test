@@ -9,10 +9,10 @@
   </div>
 </template>
 <script>
-import emmit from '@/utils/emmit.js'
+import emmit from '@/utils/emmit'
 export default {
   name: 'myInput',
-  mixin: emmit,
+  mixins: [emmit],
   props: {
     value: {
       type: String
@@ -31,7 +31,7 @@ export default {
   methods: {
     handleInput (e) {
       let value =  e.target.value
-      this.emit('input', value)
+      this.$emit('input', value)
       this.currentValue = value
       this.dispatch('myFormItem', 'form-change', value)
     },
