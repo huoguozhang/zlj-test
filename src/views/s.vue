@@ -7,8 +7,13 @@
       <myFormItem prop="email" label="邮箱">
         <my-input type="email" v-model="userForm.email"></my-input>
       </myFormItem>
-      <myFormItem>
-        <myCheckBox v-model="userForm.isAgree">同意我们的策略吗？</myCheckBox>
+      <myFormItem label="想要就业的城市" prop="city">
+        <myCheckGroup v-model="userForm.city">
+          <myCheckBox label="hangzhou">杭州</myCheckBox>
+          <myCheckBox label="shenzhen">深圳</myCheckBox>
+          <myCheckBox label="beijing">北京</myCheckBox>
+          <myCheckBox label="shanghai">上海</myCheckBox>
+        </myCheckGroup>
       </myFormItem>
       <myFormItem>
         <el-button @click="submit('myForm')">提交</el-button>
@@ -24,9 +29,10 @@ import myInput from '../components/myInput.vue'
 import myForm from '../components/myForm'
 import myFormItem from '../components/myFormItem'
 import myCheckBox from '../components/myCheckBox.vue'
+import myCheckGroup from '../components/myCheckGroup'
 export default {
   components: {
-    myForm, myFormItem, myInput, myCheckBox
+    myForm, myFormItem, myInput, myCheckBox, myCheckGroup
   },
   mixins: [emitter],
   name: 'son',
@@ -36,7 +42,8 @@ export default {
       userForm: {
         name: '',
         email: '',
-        isAgree: false
+        isAgree: true,
+        city: []
       },
       rules: {
         name: [
