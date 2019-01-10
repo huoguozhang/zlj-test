@@ -8,6 +8,9 @@
         <my-input type="email" v-model="userForm.email"></my-input>
       </myFormItem>
       <myFormItem>
+        <myCheckBox v-model="userForm.isAgree">同意我们的策略吗？</myCheckBox>
+      </myFormItem>
+      <myFormItem>
         <el-button @click="submit('myForm')">提交</el-button>
         <el-button @click="resetForm">重置</el-button>
       </myFormItem>
@@ -20,9 +23,10 @@ import emitter from '../utils/emmit'
 import myInput from '../components/myInput.vue'
 import myForm from '../components/myForm'
 import myFormItem from '../components/myFormItem'
+import myCheckBox from '../components/myCheckBox.vue'
 export default {
   components: {
-    myForm, myFormItem, myInput
+    myForm, myFormItem, myInput, myCheckBox
   },
   mixins: [emitter],
   name: 'son',
@@ -31,7 +35,8 @@ export default {
       joyText: '考上清华大学长河分校',
       userForm: {
         name: '',
-        email: ''
+        email: '',
+        isAgree: false
       },
       rules: {
         name: [
