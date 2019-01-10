@@ -54,6 +54,7 @@ export default {
     // 只支持 blur 和 change，所以过滤出符合要求的 rule 规则
     getFilteredRule (trigger) {
       const rules = this.getRules()
+      // 没有传trigger或者在blur 和 change中
       return rules.filter(rule => !rule.trigger || rule.trigger.indexOf(trigger) !== -1)
     },
     validate(trigger, callback = function () {}) {

@@ -8,7 +8,7 @@
         <my-input type="email" v-model="userForm.email"></my-input>
       </myFormItem>
       <myFormItem>
-        <el-button @click="submit">提交</el-button>
+        <el-button @click="submit('myForm')">提交</el-button>
         <el-button @click="resetForm">重置</el-button>
       </myFormItem>
     </myForm>
@@ -47,7 +47,15 @@ export default {
   created () {
   },
   methods: {
-    submit () {},
+    submit (form) {
+      this.$refs[form].validate(valid => {
+        if (valid) {
+          this.$message.success('校验通过')
+        } else {
+          this.$message.error('信息不完整或者不符合要求!')
+        }
+      })
+    },
     resetForm () {
       this.$refs.myForm.resetFields()
     }

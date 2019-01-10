@@ -23,6 +23,9 @@ export default {
       currentValue: ''
     }
   },
+  created () {
+    this.currentValue = this.value
+  },
   watch: {
     value (val) {
       this.currentValue = val
