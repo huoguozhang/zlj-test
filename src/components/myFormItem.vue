@@ -74,6 +74,7 @@ export default {
       let model = {}
       model[this.prop] = this.fieldValue
       validator.validate(model, { firstFields: true }, errors => {
+        debugger
         this.validateState = !errors ? 'success' : 'error'
         this.validateMessage = errors ? errors[0].message : ''
         callback(this.validateMessage)

@@ -40,7 +40,7 @@ export default {
       this.currentValue = val
       this.$emit('input', val)
       this.$emit('on-change', val)
-      // this.dispatch('myFormItem', 'form-change', val)
+      this.dispatch('myFormItem', 'form-change', val)
     },
     updateModel (update) {
       this.childrens = findComponentsDownward(this, 'myCheckBox')

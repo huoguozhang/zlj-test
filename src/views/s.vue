@@ -10,7 +10,7 @@
       <myFormItem label="想要就业的城市" prop="city">
         <myCheckGroup v-model="userForm.city">
           <myCheckBox label="hangzhou">杭州</myCheckBox>
-          <myCheckBox label="hangzhou">深圳</myCheckBox>
+          <myCheckBox label="shenzhen">深圳</myCheckBox>
           <myCheckBox label="beijing">北京</myCheckBox>
           <myCheckBox label="shanghai">上海</myCheckBox>
         </myCheckGroup>
@@ -20,23 +20,6 @@
         <el-button @click="resetForm">重置</el-button>
       </myFormItem>
     </myForm>
-    <div id='example-3'>
-      <input
-        type="checkbox"
-        id="jack"
-        value="Jack"
-        v-model="checkedNames"
-        ref="checkbox1"
-        @change="change"
-      >
-      <label for="jack">Jack</label>
-      <input type="checkbox" id="john" value="John" v-model="checkedNames">
-      <label for="john">John</label>
-      <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
-      <label for="mike">Mike</label>
-      <br>
-      <span>Checked names: {{ checkedNames }}</span>
-    </div>
   </div>
 </template>
 <script>
@@ -64,11 +47,16 @@ export default {
       },
       rules: {
         name: [
+          { required: true, message: '用户名不能为空', trigger: 'change' },
           { required: true, message: '用户名不能为空', trigger: 'blur' }
         ],
         email: [
           { required: true, message: '邮箱不能为空', trigger: 'blur' },
-          { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
+          { type: 'email', message: '邮箱格式不正确', trigger: 'change' }
+        ],
+        city: [
+          { required: true, message: '请选择城市', trigger: 'blur' },
+          { type: 'array', message: '格式不正确', trigger: 'change' }
         ]
       }
     }

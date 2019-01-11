@@ -36,6 +36,7 @@ export default {
     // 校验整个表单
     validate (callback) {
       return new Promise(resolve => {
+        debugger
         let counts = 0
         let pass = true
         this.fields.forEach(field => {
