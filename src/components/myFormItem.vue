@@ -40,7 +40,7 @@ export default {
     setRules () {
       let rules = this.getRules()
       if (rules.length > 0) {
-        rules.some(v => this.isRequired =  v.required || false)
+        rules.some(v => ((this.isRequired =  v.required)) || false)
       }
       this.$on('form-change', this.onFieldChange)
       this.$on('form-blur', this.onFieldBlur)
@@ -49,7 +49,7 @@ export default {
       // 获取定义的校验规则
       let formRules = this.form.rules
       formRules = formRules ? formRules[this.prop] : []
-      return [].concat(formRules)
+      return [].concat(formRules || [])
     },
     // 只支持 blur 和 change，所以过滤出符合要求的 rule 规则
     getFilteredRule (trigger) {

@@ -21,8 +21,10 @@
 </template>
 <script>
 import { findComponentUpward } from '../utils/assist'
+import emmit from '@/utils/emmit'
 export default {
   name: 'myCheckBox',
+  mixins: [emmit],
   data () {
     return {
       currentValue: false,
@@ -48,6 +50,7 @@ export default {
     this.parent = findComponentUpward(this, 'myCheckGroup')
     if (this.parent) {
       this.group = true
+      // 更新子组件的model值
       this.parent.updateModel(true)
     } else {
       this.currentValue = this.value
@@ -59,11 +62,12 @@ export default {
         return false
       }
       let value = e.target.checked
-      this.currentValue = value
-      this.$emit('input', value) // v-model语法糖
       if (this.group) {
+        // 告诉父组件我更新了
         this.parent.change(this.model)
       } else {
+        this.$emit('input', value) // v-model语法糖
+        this.currentValue = value
         this.$emit('on-change', value) // 通知checkGroup
         this.dispatch('iFormItem', 'on-form-change', value) // 通知formItem
       }

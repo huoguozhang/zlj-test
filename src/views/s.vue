@@ -10,7 +10,7 @@
       <myFormItem label="想要就业的城市" prop="city">
         <myCheckGroup v-model="userForm.city">
           <myCheckBox label="hangzhou">杭州</myCheckBox>
-          <myCheckBox label="shenzhen">深圳</myCheckBox>
+          <myCheckBox label="hangzhou">深圳</myCheckBox>
           <myCheckBox label="beijing">北京</myCheckBox>
           <myCheckBox label="shanghai">上海</myCheckBox>
         </myCheckGroup>
@@ -20,6 +20,23 @@
         <el-button @click="resetForm">重置</el-button>
       </myFormItem>
     </myForm>
+    <div id='example-3'>
+      <input
+        type="checkbox"
+        id="jack"
+        value="Jack"
+        v-model="checkedNames"
+        ref="checkbox1"
+        @change="change"
+      >
+      <label for="jack">Jack</label>
+      <input type="checkbox" id="john" value="John" v-model="checkedNames">
+      <label for="john">John</label>
+      <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+      <label for="mike">Mike</label>
+      <br>
+      <span>Checked names: {{ checkedNames }}</span>
+    </div>
   </div>
 </template>
 <script>
@@ -38,7 +55,7 @@ export default {
   name: 'son',
   data () {
     return {
-      joyText: '考上清华大学长河分校',
+      checkedNames: [],
       userForm: {
         name: '',
         email: '',
