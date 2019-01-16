@@ -10,33 +10,30 @@
       <myFormItem label="想要就业的城市" prop="city">
         <myCheckGroup v-model="userForm.city">
           <myCheckBox label="hangzhou">杭州</myCheckBox>
-          <myCheckBox label="hangzhou">深圳</myCheckBox>
+          <myCheckBox label="shenzhen">深圳</myCheckBox>
           <myCheckBox label="beijing">北京</myCheckBox>
           <myCheckBox label="shanghai">上海</myCheckBox>
         </myCheckGroup>
+      </myFormItem>
+      <myFormItem label="性别:" prop="sex">
+        <myRadio v-model="userForm.sex" label="male">
+          男
+        </myRadio>
+        <myRadio v-model="userForm.sex" label="female">
+          女
+        </myRadio>
+      </myFormItem>
+      <myFormItem label="接受调剂">
+        <myRadioGroup>
+          <myRadio label="accept">接受</myRadio>
+          <myRadio label="refuse">不接受</myRadio>
+        </myRadioGroup>
       </myFormItem>
       <myFormItem>
         <el-button @click="submit('myForm')">提交</el-button>
         <el-button @click="resetForm">重置</el-button>
       </myFormItem>
     </myForm>
-    <div id='example-3'>
-      <input
-        type="checkbox"
-        id="jack"
-        value="Jack"
-        v-model="checkedNames"
-        ref="checkbox1"
-        @change="change"
-      >
-      <label for="jack">Jack</label>
-      <input type="checkbox" id="john" value="John" v-model="checkedNames">
-      <label for="john">John</label>
-      <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
-      <label for="mike">Mike</label>
-      <br>
-      <span>Checked names: {{ checkedNames }}</span>
-    </div>
   </div>
 </template>
 <script>
@@ -47,9 +44,11 @@ import myForm from '../components/myForm'
 import myFormItem from '../components/myFormItem'
 import myCheckBox from '../components/myCheckBox.vue'
 import myCheckGroup from '../components/myCheckGroup'
+import myRadio from '../components/myRadio.vue'
+import myRadioGroup from '../components/myRadioGroup.vue'
 export default {
   components: {
-    myForm, myFormItem, myInput, myCheckBox, myCheckGroup
+    myForm, myFormItem, myInput, myCheckBox, myCheckGroup, myRadio, myRadioGroup
   },
   mixins: [emitter],
   name: 'son',
@@ -60,7 +59,8 @@ export default {
         name: '',
         email: '',
         isAgree: true,
-        city: []
+        city: [],
+        sex: ''
       },
       rules: {
         name: [
@@ -69,6 +69,10 @@ export default {
         email: [
           { required: true, message: '邮箱不能为空', trigger: 'blur' },
           { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
+        ],
+        city: [
+          { required: true, type: 'array', message: '城市为必填项', trigger: 'change' },
+          { required: true, type: 'array', message: '城市为必填项', trigger: 'blur' }
         ]
       }
     }
