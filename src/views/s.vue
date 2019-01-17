@@ -23,8 +23,8 @@
           女
         </myRadio>
       </myFormItem>
-      <myFormItem label="接受调剂">
-        <myRadioGroup>
+      <myFormItem label="接受调剂" prop="adjust">
+        <myRadioGroup v-model="userForm.adjust">
           <myRadio label="accept">接受</myRadio>
           <myRadio label="refuse">不接受</myRadio>
         </myRadioGroup>
@@ -60,7 +60,8 @@ export default {
         email: '',
         isAgree: true,
         city: [],
-        sex: ''
+        sex: '',
+        adjust: ''
       },
       rules: {
         name: [
@@ -74,6 +75,14 @@ export default {
         city: [
           { required: true, type: 'array', message: '城市为必填项', trigger: 'change' },
           { required: true, type: 'array', message: '城市为必填项', trigger: 'blur' }
+        ],
+        adjust: [
+          { required: true, type: 'string', message: '选择是否接受调剂', trigger: 'change' },
+          { required: true, type: 'string', message: '选择是否接受调剂', trigger: 'blur' }
+        ],
+        sex: [
+          { required: true, type: 'string', message: '选择性别', trigger: 'change' },
+          { required: true, type: 'string', message: '选择性别', trigger: 'blur' }
         ]
       }
     }

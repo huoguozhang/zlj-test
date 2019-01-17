@@ -4,6 +4,10 @@
       <input
         v-if="group"
         :value="label"
+        :disabled="disabled"
+        :checked="currentValue"
+        v-model="model"
+        @change="change"
         type="radio">
       <input
         v-else
@@ -19,7 +23,9 @@
 </template>
 <script>
 import { findBrothersComponents, findComponentUpward } from '../utils/assist'
+import emmit from '@/utils/emmit.js'
 export default {
+  mixins: [emmit],
   name: 'myRadio',
   props: {
     label: {
@@ -49,13 +55,15 @@ export default {
     this.parent = findComponentUpward(this, 'myRadioGroup')
     if (this.parent) {
       this.group = true
+      this.parent.updateModel(true)
     } else {
-
+      this.currentValue = this.value
     }
   },
   methods: {
     change (e) {
       if(this.group) {
+        this.parent.change(this.model)
       } else {
         let radios = findBrothersComponents(this, 'myRadio')
         let value = e.target.checked
