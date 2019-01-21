@@ -1,14 +1,23 @@
 <template>
   <div id="app">
+    <myDisplay :code="userDisplay"></myDisplay>
     <son></son>
   </div>
 </template>
 <script>
 import son from './views/s.vue'
+import myDisplay from './components/myDisplay.vue'
+import userDisplay from './views/userDisplay.js'
 export default {
   name: 'app',
   components: {
-    son
+    son,
+    myDisplay
+  },
+  data () {
+    return {
+      userDisplay
+    }
   }
 }
 </script>
