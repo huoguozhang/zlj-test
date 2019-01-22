@@ -1,18 +1,21 @@
 <template>
   <div id="app">
-    <myDisplay :code="userDisplay"></myDisplay>
-    <son></son>
+    <myAlert></myAlert>
+    <myDisplay :code="userDisplay" v-if="false"></myDisplay>
+    <son v-if="false"></son>
   </div>
 </template>
 <script>
 import son from './views/s.vue'
 import myDisplay from './components/myDisplay.vue'
 import userDisplay from './views/userDisplay.js'
+import myAlert from './components/myAlert'
 export default {
   name: 'app',
   components: {
     son,
-    myDisplay
+    myDisplay,
+    myAlert
   },
   data () {
     return {
