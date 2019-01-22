@@ -1,23 +1,37 @@
 <template>
   <div id="app">
-    <myDisplay :code="userDisplay"></myDisplay>
-    <son></son>
+    <el-button @click="showMessage">展示消息</el-button>
+    <son v-if="false"></son>
+    <myAlert></myAlert>
+    <myDisplay v-if="false"></myDisplay>
   </div>
 </template>
 <script>
 import son from './views/s.vue'
 import myDisplay from './components/myDisplay.vue'
 import userDisplay from './views/userDisplay.js'
+import myAlert from './components/myAlert.vue'
 export default {
   name: 'app',
   components: {
     son,
-    myDisplay
+    myDisplay,
+    myAlert
   },
   data () {
     return {
       userDisplay
     }
+  },
+  methods: {
+    showMessage () {
+      this.$Alert({
+        content: '你好',
+        duration: 10
+      })
+    }
+  },
+  mounted () {
   }
 }
 </script>

@@ -47,7 +47,6 @@ export default {
           }
         )
         this.component = new profile().$mount()
-        console.log(this.$refs.myDisplay === this.$el)
         this.$refs.myDisplay.appendChild(this.component.$el)
       }
       if (this.css !== '') {
