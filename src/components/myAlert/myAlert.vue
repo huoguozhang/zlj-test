@@ -1,7 +1,11 @@
 <template>
   <div class="alert">
     <div class="alert-main" v-for="item in notices" :key="item.name">
-      <div class="alert-content">{{ item.content }}</div>
+      <div class="alert-content">
+        <i
+          :class="types[item.type].class"
+          :style="{color: types[item.type].color}"></i>{{ item.content }}
+      </div>
     </div>
   </div>
 </template>
@@ -13,7 +17,25 @@
   export default {
     data () {
       return {
-        notices: []
+        notices: [],
+        types: {
+          success: {
+            class: 'el-icon-success',
+            color: 'green'
+          },
+          error: {
+            class: 'el-icon-error',
+            color: 'red'
+          },
+          warning: {
+            class: 'el-icon-warning',
+            color: 'orange'
+          },
+          info: {
+            class: 'el-icon-info',
+            color: 'grey'
+          }
+        }
       }
     },
     methods: {
@@ -59,4 +81,3 @@
     margin-bottom: 8px;
   }
 </style>
-
