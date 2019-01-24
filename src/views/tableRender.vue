@@ -9,10 +9,33 @@
     components: { TableRender },
     data () {
       return {
+        editName: '',  // 第一列输入框
+        editAge: '',  // 第二列输入框
+        editBirthday: '',  // 第三列输入框
+        editAddress: '',  // 第四列输入框
+        editIndex: -1,
         columns: [
           {
             title: '姓名',
-            key: 'name'
+            key: 'name',
+            render: (h, { row, index }) => {
+              let son
+              if (this.editIndex === index) {
+                son = [h('input', {
+                  domProps: {
+                    value: row.name
+                  },
+                  on: {
+                    input: (e) => {
+                      this.editName = e.target.value
+                    }
+                  }
+                })]
+              } else {
+                son = row.name
+              }
+              return h('div', son)
+            }
           },
           {
             title: '年龄',
@@ -20,14 +43,55 @@
           },
           {
             title: '出生日期',
-            key: 'birthday'
+            key: 'birthday',
+            render: (h, { row, column }) => {
+              let str = new Date(parseInt(row[column.key])).toLocaleString()
+              return h('p', str)
+            }
           },
           {
             title: '地址',
             key: 'address'
           },
           {
-            title: '操作'
+            title: '操作',
+            render: (h, { row, index }) => {
+              if (this.editIndex === index) {
+                return [
+                  h('button', {
+                    on: {
+                      click: () => {
+                        this.data[index].name = this.editName
+                        this.data[index].age = this.editAge
+                        this.data[index].birthday = this.editBirthday
+                        this.data[index].address = this.editAddress
+                        this.editIndex = -1
+                      }
+                    }
+                  }, '保存'),
+                  h('button', {
+                    on: {
+                      click: () => {
+                        this.editIndex = -1
+                      }
+                    }
+                  }, '取消')
+                ]
+              } else {
+                return h('button', {
+                  size: 'mini',
+                  on: {
+                    click: () => {
+                      this.editName = row.name
+                      this.editAge = row.age
+                      this.editAddress = row.address
+                      this.editBirthday = row.birthday
+                      this.editIndex = index
+                    }
+                  }
+                }, '修改')
+              }
+            }
           }
         ],
         data: [

@@ -11,6 +11,11 @@
         <template v-if="'render' in col">
           <RenderRow :row="row" :column="col" :index="indexTr" :render="col.render"></RenderRow>
         </template>
+        <template
+          v-else-if="'slot' in col"
+        >
+          <slot :row="row" :column="column" :index="indexTr" :name="col.slot"></slot>
+        </template>
         <template v-else>
           {{ row[col.key] }}
         </template>
