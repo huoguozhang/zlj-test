@@ -1,11 +1,8 @@
 <template>
   <div id="app">
-    <Test>
-      <template slot-scope="data">
-        <b>{{data}}</b>
-      </template>
-    </Test>
-    <tableRender></tableRender>
+    <component :is="zlj">hhh</component>
+    <self></self>
+    <tableRender v-if="false"></tableRender>
     <el-button @click="showMessage">展示消息</el-button>
     <son v-if="false"></son>
     <myAlert v-if="false"></myAlert>
@@ -13,52 +10,34 @@
   </div>
 </template>
 <script>
+import self from './views/self'
 import son from './views/s.vue'
 import myDisplay from './components/myDisplay.vue'
 import userDisplay from './views/userDisplay.js'
 import myAlert from './components/myAlert.vue'
 import tableRender from './views/tableRender'
-const Test = {
-    data () {
-      return {
-        test: 'hello world',
-        userInfo: {
-          name: '张理健',
-          age: 26,
-          sex: 'M'
-        }
-      }
-    },
-    created () {
-    },
-    template: `
-    <div>
-      <h1>
-        <slot :test="test" :userInfo="userInfo"></slot>
-      </h1>
-    </div>
-  `
-  }
 export default {
   name: 'app',
   components: {
+    self,
     son,
     myDisplay,
     myAlert,
-    tableRender,
-    Test
+    tableRender
   },
   data () {
     return {
+      zlj: self,
       userDisplay
     }
   },
   methods: {
     showMessage () {
-      this.$Alert({
+      this.s
+     /* this.$Alert({
         content: '你好',
         duration: 10
-      })
+      }) */
     }
   },
   mounted () {

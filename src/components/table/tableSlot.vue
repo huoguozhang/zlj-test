@@ -14,7 +14,7 @@
         <template
           v-else-if="'slot' in col"
         >
-          <slot :row="row" :column="column" :index="indexTr" :name="col.slot"></slot>
+          <slot :row="row" :column="col" :index="indexTr" :name="col.slot"></slot>
         </template>
         <template v-else>
           {{ row[col.key] }}
