@@ -18,7 +18,9 @@ export default {
           name = parent.$options.name
         }
       }
-      parent.$emit.apply(parent, [eventName].concat(data))
+      if (parent) {
+        parent.$emit.apply(parent, [eventName].concat(data))
+      }
     },
     broadcast (componentName, eventName, data) {
       broadcast.call(this ,componentName, eventName, data)

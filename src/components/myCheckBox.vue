@@ -36,7 +36,7 @@ export default {
   props: {
     value: {
       type: [String, Number, Boolean],
-      default: true
+      default: false
     },
     disabled: {
       type: Boolean,
