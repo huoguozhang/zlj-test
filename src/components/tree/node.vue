@@ -61,6 +61,10 @@ export default {
   methods: {
     handleCheck (checked) {
       this.updateTreeDown(this.data, checked)
+      if (this.tree) {
+        this.tree.emitEvent('on-check-change', this.data)
+      }
+      // on-check-change：点击复选框时触发, 提供给用户的
     },
     // 当点击某个勾选框的时候向下更新所有的子
     updateTreeDown (data, checked) {
@@ -72,6 +76,7 @@ export default {
     handleExpand () {
       this.$set(this.data, 'expand', !this.data.expand)
       if (this.tree) {
+        // on-toggle-expand：展开和收起子列表时触发 提供给用户使用的
         this.tree.emitEvent('on-toggle-expand', this.data)
       }
     }
